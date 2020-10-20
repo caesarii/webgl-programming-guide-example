@@ -47,14 +47,15 @@ function main() {
   gl.clear(gl.COLOR_BUFFER_BIT);
 
   // Draw the rectangle
-  gl.drawArrays(gl.TRIANGLE, 0, n);
+  gl.drawArrays(gl.TRIANGLES, 0, n);
 }
 
 function initVertexBuffers(gl) {
   var vertices = new Float32Array([
-    -0.5, 0.5,       -0.5, -0.5,       0.5, 0.5　// 0.5, -0.5
+    -0.5, 0.5,  -0.5, -0.5,  0.5, 0.5,
+    0.5, 0.5,   -0.5, -0.5,  0.5, -0.5
   ]);
-  var n = 3; // The number of vertices
+  var n = 6; // The number of vertices
 
   // Create a buffer object
   var vertexBuffer = gl.createBuffer();
