@@ -1,16 +1,20 @@
 // HelloQuad.js (c) 2012 matsuda
 // Vertex shader program
 var VSHADER_SOURCE =
-  'attribute vec4 a_Position;\n' +
-  'void main() {\n' +
-  '  gl_Position = a_Position;\n' +
-  '}\n';
+`
+  attribute vec4 a_Position;
+  void main() {
+    gl_Position = a_Position;
+  }
+`
 
 // Fragment shader program
 var FSHADER_SOURCE =
-  'void main() {\n' +
-  '  gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);\n' +
-  '}\n';
+`
+  void main() {
+    gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+  }
+`
 
 function main() {
   // Retrieve <canvas> element
@@ -43,14 +47,14 @@ function main() {
   gl.clear(gl.COLOR_BUFFER_BIT);
 
   // Draw the rectangle
-  gl.drawArrays(gl.TRIANGLE_STRIP, 0, n);
+  gl.drawArrays(gl.TRIANGLE, 0, n);
 }
 
 function initVertexBuffers(gl) {
   var vertices = new Float32Array([
-    -0.5, 0.5,   -0.5, -0.5,   0.5, 0.5,　0.5, -0.5
+    -0.5, 0.5,       -0.5, -0.5,       0.5, 0.5　// 0.5, -0.5
   ]);
-  var n = 4; // The number of vertices
+  var n = 3; // The number of vertices
 
   // Create a buffer object
   var vertexBuffer = gl.createBuffer();
