@@ -1,19 +1,23 @@
 // ColoredPoint.js (c) 2012 matsuda
 // Vertex shader program
 var VSHADER_SOURCE =
-  'attribute vec4 a_Position;\n' +
-  'void main() {\n' +
-  '  gl_Position = a_Position;\n' +
-  '  gl_PointSize = 10.0;\n' +
-  '}\n';
+  `
+  attribute vec4 a_Position;
+  void main() {
+    gl_Position = a_Position;
+    gl_PointSize = 50.0;
+  }
+  `
 
 // Fragment shader program
 var FSHADER_SOURCE =
-  'precision mediump float;\n' +
-  'uniform vec4 u_FragColor;\n' +  // uniform変数
-  'void main() {\n' +
-  '  gl_FragColor = u_FragColor;\n' +
-  '}\n';
+`
+precision mediump float;
+uniform vec4 u_FragColor;  // uniform変数
+void main() {
+  gl_FragColor = u_FragColor;
+}
+`
 
 function main() {
   // Retrieve <canvas> element
@@ -67,12 +71,15 @@ function click(ev, gl, canvas, a_Position, u_FragColor) {
   y = (canvas.height/2 - (y - rect.top))/(canvas.height/2);
 
   // Store the coordinates to g_points array
-  g_points.push([x, y]);
+    console.log('point', [x,y])
+    g_points.push([x, y]);
   // Store the coordinates to g_points array
   if (x >= 0.0 && y >= 0.0) {      // First quadrant
     g_colors.push([1.0, 0.0, 0.0, 1.0]);  // Red
   } else if (x < 0.0 && y < 0.0) { // Third quadrant
     g_colors.push([0.0, 1.0, 0.0, 1.0]);  // Green
+  } else if (x > 0 && y < 0) {
+    g_colors.push([0.0, 0.0, 1.0, 1.0]);
   } else {                         // Others
     g_colors.push([1.0, 1.0, 1.0, 1.0]);  // White
   }
