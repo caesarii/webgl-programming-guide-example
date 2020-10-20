@@ -1,26 +1,30 @@
 // RotatedTriangle.js (c) 2012 matsuda
 // Vertex shader program
 var VSHADER_SOURCE =
+`
   // x' = x cosβ - y sinβ
   // y' = x sinβ + y cosβ　Equation 3.3
   // z' = z
-  'attribute vec4 a_Position;\n' +
-  'uniform float u_CosB, u_SinB;\n' +
-  'void main() {\n' +
-  '  gl_Position.x = a_Position.x * u_CosB - a_Position.y * u_SinB;\n' +
-  '  gl_Position.y = a_Position.x * u_SinB + a_Position.y * u_CosB;\n' +
-  '  gl_Position.z = a_Position.z;\n' +
-  '  gl_Position.w = 1.0;\n' +
-  '}\n';
+  attribute vec4 a_Position;
+  uniform float u_CosB, u_SinB;
+  void main() {
+    gl_Position.x = a_Position.x * u_CosB - a_Position.y * u_SinB;
+    gl_Position.y = a_Position.x * u_SinB + a_Position.y * u_CosB;
+    gl_Position.z = a_Position.z;
+    gl_Position.w = 1.0;
+  }
+`
 
 // Fragment shader program
 var FSHADER_SOURCE =
-  'void main() {\n' +
-  '  gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);\n' +
-  '}\n';
+`
+  void main() {
+    gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+  }
+`
 
 // The rotation angle
-var ANGLE = 90.0; 
+var ANGLE = 45.0; 
 
 function main() {
   // Retrieve <canvas> element

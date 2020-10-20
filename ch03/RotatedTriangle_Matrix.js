@@ -1,20 +1,27 @@
 // RotatedTriangle_Matrix.js (c) matsuda
 // Vertex shader program
 var VSHADER_SOURCE =
-  'attribute vec4 a_Position;\n' +
-  'uniform mat4 u_xformMatrix;\n' +
-  'void main() {\n' +
-  '  gl_Position = u_xformMatrix * a_Position;\n' +
-  '}\n';
+`
+  attribute vec4 a_Position;
+  uniform mat4 u_xformMatrixRotate;
+  uniform mat4 u_xformMatrixTranslate;
+  void main() {
+    gl_Position = u_xformMatrixTranslate * u_xformMatrixRotate * a_Position;
+  }
+`
 
 // Fragment shader program
 var FSHADER_SOURCE =
-  'void main() {\n' +
-  '  gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);\n' +
-  '}\n';
+`
+  void main() {
+    gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+  }
+`
 
 // The rotation angle
 var ANGLE = 90.0;
+
+var Tx = 0.5, Ty = 0.5, Tz = 0.0;
 
 function main() {
   // Retrieve <canvas> element
@@ -45,20 +52,34 @@ function main() {
   var cosB = Math.cos(radian), sinB = Math.sin(radian);
 
   // Note: WebGL is column major order
-  var xformMatrix = new Float32Array([
+  var xformMatrixRotate = new Float32Array([
      cosB, sinB, 0.0, 0.0,
     -sinB, cosB, 0.0, 0.0,
       0.0,  0.0, 1.0, 0.0,
       0.0,  0.0, 0.0, 1.0
   ]);
 
+  var xformMatrixTranslate = new Float32Array([
+    1.0, 0.0, 0.0, 0.0,
+    0.0, 1.0, 0.0, 0.0,
+    0.0,  0.0, 1.0, 0.0,
+    Tx,  Ty, Tz, 1.0
+  ]);
+
   // Pass the rotation matrix to the vertex shader
-  var u_xformMatrix = gl.getUniformLocation(gl.program, 'u_xformMatrix');
-  if (!u_xformMatrix) {
-    console.log('Failed to get the storage location of u_xformMatrix');
+  var u_xformMatrixRotate = gl.getUniformLocation(gl.program, 'u_xformMatrixRotate');
+  if (!u_xformMatrixRotate) {
+    console.log('Failed to get the storage location of u_xformMatrixRotate');
     return;
   }
-  gl.uniformMatrix4fv(u_xformMatrix, false, xformMatrix);
+  gl.uniformMatrix4fv(u_xformMatrixRotate, false, xformMatrixRotate);
+
+  var u_xformMatrixTranslate = gl.getUniformLocation(gl.program, 'u_xformMatrixTranslate');
+  if (!u_xformMatrixTranslate) {
+    console.log('Failed to get the storage location of u_xformMatrixTranslate');
+    return;
+  }
+  gl.uniformMatrix4fv(u_xformMatrixTranslate, false, xformMatrixTranslate);
 
   // Specify the color for clearing <canvas>
   gl.clearColor(0, 0, 0, 1);

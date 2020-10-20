@@ -1,17 +1,21 @@
 // TranslatedTriangle.js (c) 2012 matsuda
 // Vertex shader program
 var VSHADER_SOURCE =
-  'attribute vec4 a_Position;\n' +
-  'uniform vec4 u_Translation;\n' +
-  'void main() {\n' +
-  '  gl_Position = a_Position + u_Translation;\n' +
-  '}\n';
+`
+  attribute vec4 a_Position;
+  uniform vec4 u_Translation;
+  void main() {
+    gl_Position = a_Position + u_Translation;
+  }
+`
 
 // Fragment shader program
 var FSHADER_SOURCE =
-  'void main() {\n' +
-  '  gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);\n' +
-  '}\n';
+`
+  void main() {
+    gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+  }
+`
 
 // The translation distance for x, y, and z direction
 var Tx = 0.5, Ty = 0.5, Tz = 0.0;

@@ -1,17 +1,21 @@
 // ScaledTriangle_Matrix.js (c) 2012 matsuda
 // Vertex shader program
 var VSHADER_SOURCE =
-  'attribute vec4 a_Position;\n' +
-  'uniform mat4 u_xformMatrix;\n' +
-  'void main() {\n' +
-  '  gl_Position = u_xformMatrix * a_Position;\n' +
-  '}\n';
+`
+  attribute vec4 a_Position;
+  uniform mat4 u_xformMatrix;
+  void main() {
+    gl_Position = u_xformMatrix * a_Position;
+  }
+`
 
 // Fragment shader program
 var FSHADER_SOURCE =
-  'void main() {\n' +
-  '  gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);\n' +
-  '}\n';
+`
+  void main() {
+    gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+  }
+`
 
 // The scaling factor
 var Sx = 1.0, Sy = 1.5, Sz = 1.0;
