@@ -1,19 +1,22 @@
 // MultiAttributeSize.js (c) 2012 matsuda
 // Vertex shader program
 var VSHADER_SOURCE =
-  'attribute vec4 a_Position;\n' +
-  'attribute float a_PointSize;\n' +
-  'void main() {\n' +
-  '  gl_Position = a_Position;\n' +
-  '  gl_PointSize = a_PointSize;\n' +
-  '}\n';
+`
+  attribute vec4 a_Position;
+  attribute float a_PointSize;
+  void main() {
+    gl_Position = a_Position;
+    gl_PointSize = a_PointSize;
+  }
+`
 
 // Fragment shader program
 var FSHADER_SOURCE =
-  'void main() {\n' +
-  '  gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);\n' +
-  '}\n';
-
+`
+  void main() {
+    gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+  }
+`
 function main() {
   // Retrieve <canvas> element
   var canvas = document.getElementById('webgl');
