@@ -1,23 +1,26 @@
 // ColoredTriangle.js (c) 2012 matsuda
 // Vertex shader program
-var VSHADER_SOURCE = 
-  'attribute vec4 a_Position;\n' +
-  'attribute vec4 a_Color;\n' +
-  'varying vec4 v_Color;\n' +
-  'void main() {\n' +
-  '  gl_Position = a_Position;\n' +
-  '  v_Color = a_Color;\n' +
-  '}\n';
+var VSHADER_SOURCE =
+`
+  attribute vec4 a_Position;
+  attribute vec4 a_Color;
+  varying vec4 v_Color; // varying variable
+  void main() {
+    gl_Position = a_Position;
+    gl_PointSize = 10.0;
+    v_Color = a_Color;\ // Pass the data to the fragment shader
+  }
+`
 
 // Fragment shader program
-var FSHADER_SOURCE = 
-  '#ifdef GL_ES\n' +
-  'precision mediump float;\n' +
-  '#endif GL_ES\n' +
-  'varying vec4 v_Color;\n' +
-  'void main() {\n' +
-  '  gl_FragColor = v_Color;\n' +
-  '}\n';
+var FSHADER_SOURCE =
+`
+  precision mediump float; // Precision qualifier (See Chapter 6)
+  varying vec4 v_Color;\   // Receive the data from the vertex shader
+  void main() {
+    gl_FragColor = v_Color;
+  }
+`
 
 function main() {
   // Retrieve <canvas> element

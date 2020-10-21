@@ -17,7 +17,7 @@ var FSHADER_SOURCE =
   'uniform sampler2D u_Sampler;\n' +
   'varying vec2 v_TexCoord;\n' +
   'void main() {\n' +
-  '  gl_FragColor = texture2D(u_Sampler, v_TexCoord);\n' +
+  '  gl_FragColor = texture2D(u_Sampler, vec2(v_TexCoord.s, -v_TexCoord.t));\n' + // 手动翻转 t
   '}\n';
 
 function main() {
@@ -116,16 +116,19 @@ function initTextures(gl, n) {
     console.log('Failed to create the image object');
     return false;
   }
-  // Register the event handler to be called on loading an image
   image.onload = function(){ loadTexture(gl, n, texture, u_Sampler, image); };
+
+  image.crossOrigin = "anonymous"
+  // Register the event handler to be called on loading an image
   // Tell the browser to load an image
-  image.src = '../resources/sky.jpg';
+  image.src = '../resources/orange.jpg';
+
 
   return true;
 }
 
 function loadTexture(gl, n, texture, u_Sampler, image) {
-  gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1); // Flip the image's y axis
+  // gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1); // Flip the image's y axis
   // Enable texture unit0
   gl.activeTexture(gl.TEXTURE0);
   // Bind the texture object to the target

@@ -1,19 +1,23 @@
 // HelloTriangle_FragCoord.js (c) 2012 matsuda
 // Vertex shader program
 var VSHADER_SOURCE =
-  'attribute vec4 a_Position;\n' +
-  'void main() {\n' +
-  '  gl_Position = a_Position;\n' +
-  '}\n';
+`
+  attribute vec4 a_Position;
+  void main() {
+    gl_Position = a_Position;
+  }
+`
 
 // Fragment shader program
 var FSHADER_SOURCE =
-  'precision mediump float;\n' +
-  'uniform float u_Width;\n' +
-  'uniform float u_Height;\n' +
-  'void main() {\n' +
-  '  gl_FragColor = vec4(gl_FragCoord.x/u_Width, 0.0, gl_FragCoord.y/u_Height, 1.0);\n' +
-  '}\n';
+`
+  precision mediump float;
+  uniform float u_Width;
+  uniform float u_Height;
+  void main() {
+    gl_FragColor = vec4(gl_FragCoord.x/u_Width, 0.0, gl_FragCoord.y/u_Height, 1.0);
+  }
+`
 
 function main() {
   // Retrieve <canvas> element
