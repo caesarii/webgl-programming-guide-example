@@ -1,20 +1,21 @@
 // RotatingTriangle.js (c) 2012 matsuda
 // Vertex shader program
-var VSHADER_SOURCE =
-  'attribute vec4 a_Position;\n' +
-  'uniform mat4 u_ModelMatrix;\n' +
-  'void main() {\n' +
-  '  gl_Position = u_ModelMatrix * a_Position;\n' +
-  '}\n';
-
+var VSHADER_SOURCE =`
+  attribute vec4 a_Position;
+  uniform mat4 u_ModelMatrix;
+  void main() {
+    gl_Position = u_ModelMatrix * a_Position;
+  }
+`
 // Fragment shader program
-var FSHADER_SOURCE =
-  'void main() {\n' +
-  '  gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);\n' +
-  '}\n';
+var FSHADER_SOURCE =`
+  void main() {
+    gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+  }
+`
 
 // Rotation angle (degrees/second)
-var ANGLE_STEP = 45.0;
+var ANGLE_STEP = 30.0;
 
 function main() {
   // Retrieve <canvas> element
@@ -99,6 +100,7 @@ function initVertexBuffers(gl) {
 function draw(gl, n, currentAngle, modelMatrix, u_ModelMatrix) {
   // Set the rotation matrix
   modelMatrix.setRotate(currentAngle, 0, 0, 1); // Rotation angle, rotation axis (0, 0, 1)
+  modelMatrix.translate(1.0, 0, 0)
  
   // Pass the rotation matrix to the vertex shader
   gl.uniformMatrix4fv(u_ModelMatrix, false, modelMatrix.elements);

@@ -1,17 +1,21 @@
 // RotatedTranslatedTriangle.js (c) 2012 matsuda
 // Vertex shader program
 var VSHADER_SOURCE =
-  'attribute vec4 a_Position;\n' +
-  'uniform mat4 u_ModelMatrix;\n' +
-  'void main() {\n' +
-  '  gl_Position = u_ModelMatrix * a_Position;\n' +
-  '}\n';
+`
+  attribute vec4 a_Position;
+  uniform mat4 u_ModelMatrix;
+  void main() {
+    gl_Position = u_ModelMatrix * a_Position;
+  }
+`
 
 // Fragment shader program
 var FSHADER_SOURCE =
-  'void main() {\n' +
-  '  gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);\n' +
-  '}\n';
+`
+  void main() {
+    gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+  }
+`
 
 function main() {
   // Retrieve <canvas> element
@@ -43,8 +47,9 @@ function main() {
   // Calculate a model matrix
   var ANGLE = 60.0; // The rotation angle
   var Tx = 0.5;     // Translation distance
-  modelMatrix.setRotate(ANGLE, 0, 0, 1);  // Set rotation matrix
   modelMatrix.translate(Tx, 0, 0);        // Multiply modelMatrix by the calculated translation matrix
+
+  modelMatrix.setRotate(ANGLE, 0, 0, 1);  // Set rotation matrix
 
   // Pass the model matrix to the vertex shader
   var u_ModelMatrix = gl.getUniformLocation(gl.program, 'u_ModelMatrix');
