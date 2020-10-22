@@ -1,24 +1,26 @@
 // LookAtTriangles.js (c) 2012 matsuda
 // Vertex shader program
 var VSHADER_SOURCE =
-  'attribute vec4 a_Position;\n' +
-  'attribute vec4 a_Color;\n' +
-  'uniform mat4 u_ViewMatrix;\n' +
-  'varying vec4 v_Color;\n' +
-  'void main() {\n' +
-  '  gl_Position = u_ViewMatrix * a_Position;\n' +
-  '  v_Color = a_Color;\n' +
-  '}\n';
+`attribute vec4 a_Position;
+  attribute vec4 a_Color;
+  uniform mat4 u_ViewMatrix;
+  varying vec4 v_Color;
+  void main() {
+    gl_Position = u_ViewMatrix * a_Position;
+    v_Color = a_Color;
+  }
+`
 
 // Fragment shader program
-var FSHADER_SOURCE =
-  '#ifdef GL_ES\n' +
-  'precision mediump float;\n' +
-  '#endif\n' +
-  'varying vec4 v_Color;\n' +
-  'void main() {\n' +
-  '  gl_FragColor = v_Color;\n' +
-  '}\n';
+var FSHADER_SOURCE =`
+  #ifdef GL_ES
+  precision mediump float;
+  #endif
+  varying vec4 v_Color;
+  void main() {
+    gl_FragColor = v_Color;
+  }
+`
 
 function main() {
   // Retrieve <canvas> element
@@ -56,7 +58,10 @@ function main() {
 
   // Set the matrix to be used for to set the camera view
   var viewMatrix = new Matrix4();
-  viewMatrix.setLookAt(0.20, 0.25, 0.25, 0, 0, 0, 0, 1, 0);
+
+  viewMatrix.setLookAt(0.2, 0.25, 0.25, 0, 0, 0, 0, 1, 0);
+
+  // viewMatrix.setLookAt(0.0, 0.0, 1.0, 0, 0, 0, 0, 1, 0);
 
   // Set the view matrix
   gl.uniformMatrix4fv(u_ViewMatrix, false, viewMatrix.elements);
