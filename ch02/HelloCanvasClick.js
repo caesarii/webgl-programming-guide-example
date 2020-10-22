@@ -11,6 +11,13 @@ function main() {
     return;
   }
 
+  canvas.onmousedown = function () {
+    const color = [Math.random(), Math.random(), Math.random(), 1.0]
+    console.log('color', color);
+    gl.clearColor(...color);
+    gl.clear(gl.COLOR_BUFFER_BIT);
+  }
+
   // Set clear color
   // 指定背景颜色: 一次指定, 一直存在
   // 色值: rgba
@@ -22,4 +29,6 @@ function main() {
   gl.clear(gl.COLOR_BUFFER_BIT);
 
   // webgl/opengl 基本api使用模式: 声明数据, 初始化数据, 申请内存, 数据写入指定内存, 使用内存中的数据
+
+  // demo: HelloCanvasClick
 }
