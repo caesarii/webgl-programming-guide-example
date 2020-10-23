@@ -2,7 +2,9 @@
 // Vertex shader program
 var VSHADER_SOURCE = 
 `
-  attribute vec4 a_Position; // attribute variable
+  // 顶点着色器中声明 attribute 变量, 以 a_ 开头
+  // attribute 只能在顶点着色器中使用, 每个顶点不同, 必须是全局变量, 从外部接受数据
+  attribute vec4 a_Position; 
   attribute float a_PointSize; 
   void main() {
     gl_Position = a_Position;
@@ -35,14 +37,17 @@ function main() {
     return;
   }
 
-  // Get the storage location of a_Position
+  // 获取 attribute 变量
+  // gl.getAttribLocation(program, name)
   var a_Position = gl.getAttribLocation(gl.program, 'a_Position');
   if (a_Position < 0) {
     console.log('Failed to get the storage location of a_Position');
     return;
   }
 
-  // Pass vertex position to attribute variable
+  // 向 attribute 变量传递数据
+  // gl.vertexAttrib3f(location, v0, v1, v2)
+  // 函数族
   gl.vertexAttrib3f(a_Position, 0.0, 0.0, 0.0);
 
   var a_PointSize = gl.getAttribLocation(gl.program, 'a_PointSize');
