@@ -16,6 +16,9 @@ function main() {
   // 色值: rgba
   gl.clearColor(1.0, 0.0, 0.0, 0.5);
 
+  // opengl
+  // glClearColor
+
   // Clear <canvas>
   // 使用指定颜色擦除已绘制的内容
   // 参数: 颜色缓冲区, 内存区域

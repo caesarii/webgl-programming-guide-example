@@ -4,6 +4,7 @@ var VSHADER_SOURCE =
 `
   // 顶点着色器中声明 attribute 变量, 以 a_ 开头
   // attribute 只能在顶点着色器中使用, 每个顶点不同, 必须是全局变量, 从外部接受数据
+  
   attribute vec4 a_Position; 
   attribute float a_PointSize; 
   void main() {
@@ -49,6 +50,7 @@ function main() {
   // gl.vertexAttrib3f(location, v0, v1, v2)
   // 函数族
   gl.vertexAttrib3f(a_Position, 0.0, 0.0, 0.0);
+  // vertexAttrib1f
 
   var a_PointSize = gl.getAttribLocation(gl.program, 'a_PointSize');
   if(a_PointSize < 0) {

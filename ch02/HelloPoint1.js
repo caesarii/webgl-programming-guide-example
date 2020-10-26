@@ -6,9 +6,13 @@
 // 顶点着色器 Vertex shader program
 var VSHADER_SOURCE = 
   `void main() {
-    gl_Position = vec4(0.5, 0.0, 0.0, 1.0); // 点的坐标, 必须赋值, vec4 类型
+    gl_Position = vec4(-1.0, 0.0, 0.0, 1.0); // 点的坐标, 必须赋值, vec4 类型
     gl_PointSize = 10.0;                    // 点的尺寸, float 类型
    }`;
+// api 族
+// vec4f
+// vec3
+// vec2
 
 // 片元着色器 Fragment shader program
 var FSHADER_SOURCE =
