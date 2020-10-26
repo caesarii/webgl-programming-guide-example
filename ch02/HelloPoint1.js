@@ -1,8 +1,9 @@
 // HelloPoint1.js (c) 2012 matsuda
 // 着色器
-// 类 C 语法, 必须要 main, 没有参数和返回值
+// 类 C 语法, 必须有 main 函数, 没有参数和返回值
 // 输出数据通过内置变量, gl_xxx
-// 输入数据通过声明与 webgl api 中同名的变量, 
+// 输入数据通过声明与 webgl api 中同名的变量
+
 // 顶点着色器 Vertex shader program
 var VSHADER_SOURCE = 
   `void main() {
@@ -15,17 +16,16 @@ var VSHADER_SOURCE =
 // vec2
 
 // 片元着色器 Fragment shader program
+// gl_FragColor 内置变量, 颜色
 var FSHADER_SOURCE =
   `void main() {
-    gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0); // 点的颜色, 唯一的内置变量
+    gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0); // 点的颜色, 片元着色器内的唯一的内置变量
   }
   `
 
 function main() {
-  // Retrieve <canvas> element
   var canvas = document.getElementById('webgl');
 
-  // Get the rendering context for WebGL
   var gl = getWebGLContext(canvas, true);
   if (!gl) {
     console.log('Failed to get the rendering context for WebGL');
@@ -39,10 +39,8 @@ function main() {
     return;
   }
 
-  // Specify the color for clearing <canvas>
   gl.clearColor(0.0, 0.0, 0.0, 1.0);
 
-  // Clear <canvas>
   gl.clear(gl.COLOR_BUFFER_BIT);
 
   // 绘制
