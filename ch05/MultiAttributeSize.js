@@ -18,50 +18,45 @@ var FSHADER_SOURCE =
   }
 `
 function main() {
-  // Retrieve <canvas> element
   var canvas = document.getElementById('webgl');
 
-  // Get the rendering context for WebGL
   var gl = getWebGLContext(canvas);
   if (!gl) {
     console.log('Failed to get the rendering context for WebGL');
     return;
   }
 
-  // Initialize shaders
   if (!initShaders(gl, VSHADER_SOURCE, FSHADER_SOURCE)) {
     console.log('Failed to intialize shaders.');
     return;
   }
 
-  // Set the vertex information
   var n = initVertexBuffers(gl);
   if (n < 0) {
     console.log('Failed to set the positions of the vertices');
     return;
   }
 
-  // Specify the color for clearing <canvas>
   gl.clearColor(0.0, 0.0, 0.0, 1.0);
 
-  // Clear <canvas>
   gl.clear(gl.COLOR_BUFFER_BIT);
 
-  // Draw three points
   gl.drawArrays(gl.POINTS, 0, n);
 }
 
 function initVertexBuffers(gl) {
+  // 顶点数据
   var vertices = new Float32Array([
     0.0, 0.5,   -0.5, -0.5,   0.5, -0.5
   ]);
   var n = 3;
 
+  // point-size 数据
   var sizes = new Float32Array([
     10.0, 20.0, 30.0  // Point sizes
   ]);
 
-  // Create a buffer object
+  // 声明两个 buffer
   var vertexBuffer = gl.createBuffer();  
   var sizeBuffer = gl.createBuffer();
   if (!vertexBuffer || !sizeBuffer) {
@@ -69,7 +64,7 @@ function initVertexBuffers(gl) {
     return -1;
   }
 
-  // Write vertex coordinates to the buffer object and enable it
+  // 将顶点数组写入 buffer 并启用
   gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
   gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
   var a_Position = gl.getAttribLocation(gl.program, 'a_Position');
@@ -80,7 +75,7 @@ function initVertexBuffers(gl) {
   gl.vertexAttribPointer(a_Position, 2, gl.FLOAT, false, 0, 0);
   gl.enableVertexAttribArray(a_Position);
 
-  // Bind the point size buffer object to target
+  // 将 pointSize 数组写入 buffer 并启用
   gl.bindBuffer(gl.ARRAY_BUFFER, sizeBuffer);
   gl.bufferData(gl.ARRAY_BUFFER, sizes, gl.STATIC_DRAW);
   var a_PointSize = gl.getAttribLocation(gl.program, 'a_PointSize');
@@ -88,10 +83,10 @@ function initVertexBuffers(gl) {
     console.log('Failed to get the storage location of a_PointSize');
     return -1;
   }
+  // size 参数
   gl.vertexAttribPointer(a_PointSize, 1, gl.FLOAT, false, 0, 0);
   gl.enableVertexAttribArray(a_PointSize);
 
-  // Unbind the buffer object
   gl.bindBuffer(gl.ARRAY_BUFFER, null);
 
   return n;
