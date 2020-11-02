@@ -42,7 +42,7 @@ function main() {
   gl.clear(gl.COLOR_BUFFER_BIT);
 
   // first 参数
-  gl.drawArrays(gl.POINTS, 0, n);
+  gl.drawArrays(gl.TRIANGLES, 0, n);
 }
 
 function initVertexBuffers(gl) {
@@ -53,7 +53,7 @@ function initVertexBuffers(gl) {
   // 顶点个数
   var n = 3;
 
-  // 创建缓冲区对象
+  // 声明缓冲区对象
   // 分配缓冲区对象的名称, 未分配内存, 未初始化
   var vertexBuffer = gl.createBuffer();
   if (!vertexBuffer) {
